@@ -1,10 +1,23 @@
 % Liyu MA
 % ssylm3@nottingham.edu.cn
-
+% AERO1005 Coursework 2
 
 %% PRELIMINARY TASK - ARDUINO AND GIT INSTALLATION [5 MARKS]
 clear a
-a = arduino('/dev/tty.usbserial-1110', 'Uno');
+% Auto-detect Arduino port (works on both Mac and Windows)
+ports = serialportlist("available");
+% Filter: on Mac look for usbserial, on Windows look for COM
+arduino_port = "";
+for p = ports
+    if contains(p, "usbserial") || contains(p, "COM")
+        arduino_port = p;
+        break;
+    end
+end
+if arduino_port == ""
+    error('No Arduino found. Check USB connection.');
+end
+a = arduino(arduino_port, 'Uno');
 
 % Test single LED on digital pin D10
 writeDigitalPin(a, 'D10', 1);
@@ -57,7 +70,6 @@ grid on;
 saveas(gcf, 'temperature_plot.png');  % Save plot as image file
 
 % Task 1d) Print formatted data to screen using sprintf/fprintf
-% Output follows the format specified in Table 1 of the coursework brief
 fprintf('\n');
 msg1=sprintf('Data logging initiated - %s\n', datestr(now, 'dd/mm/yyyy'));
 disp(msg1)
@@ -70,7 +82,7 @@ for min_idx = 0:10
     if sample_idx > length(temperature_data)
         sample_idx = length(temperature_data);  % Prevent out-of-bounds
     end
-    msg3=sprintf('Minute \t%d\tTemperature \t%.2f \°C\n\n', min_idx, temperature_data(sample_idx));
+    msg3=sprintf('Minute \t%d\tTemperature \t%.2f °C\n\n', min_idx, temperature_data(sample_idx));
     disp(msg3)
     fprintf('\n');
 end
@@ -112,7 +124,6 @@ file_content = fread(fid_check, '*char')';  % Read entire file as string
 disp('--- Verifying log file content ---');
 disp(file_content);
 fclose(fid_check);
-
 %% TASK 2 - LED TEMPERATURE MONITORING DEVICE IMPLEMENTATION [25 MARKS]
 
 % Insert answers here
