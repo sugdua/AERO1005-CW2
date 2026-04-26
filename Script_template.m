@@ -124,16 +124,20 @@ file_content = fread(fid_check, '*char')';  % Read entire file as string
 disp('--- Verifying log file content ---');
 disp(file_content);
 fclose(fid_check);
+
 %% TASK 2 - LED TEMPERATURE MONITORING DEVICE IMPLEMENTATION [25 MARKS]
+% Calls temp_monitor.m (separate file)
+% Green (D10): constant ON when 18-24 C
+% Yellow (D7): blinks 0.5s when < 18 C
+% Red (D4): blinks 0.25s when > 24 C
+temp_monitor(a);
 
-% Insert answers here
-
-
-%% TASK 3 - ALGORITHMS – TEMPERATURE PREDICTION [30 MARKS]
-
-% Insert answers here
-
+%% TASK 3 - ALGORITHMS - TEMPERATURE PREDICTION [30 MARKS]
+% Calls temp_prediction.m (separate file)
+% Uses 30-sample moving average to calculate rate of change
+% Predicts temperature 5 minutes ahead
+% Green: stable | Red: rising > 4 C/min | Yellow: falling > 4 C/min
+temp_prediction(a);
 
 %% TASK 4 - REFLECTIVE STATEMENT [5 MARKS]
-
-% Insert answers here
+% See submission document
