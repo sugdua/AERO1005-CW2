@@ -36,7 +36,7 @@ while true
     % Read temperature
     voltage = readVoltage(a, 'A0');
     current_temp = (voltage - V0) / TC; %Transfer voltage to temperature
-    elapsed = toc;  %Obtain the running time
+    elapsed = toc; %Obtain the running time
     
     % Store data
     time_data(end+1) = elapsed;
@@ -51,7 +51,7 @@ while true
     % LED control
     if current_temp >= T_low && current_temp <= T_high
         % Comfort range - green constant
-        writeDigitalPin(a, greenPin, 1);
+        writeDigitalPin(a, greenPin, 1); 
         writeDigitalPin(a, yellowPin, 0);
         writeDigitalPin(a, redPin, 0);
         pause(1);
@@ -60,7 +60,7 @@ while true
         % Too cold - yellow blink 0.5s
         writeDigitalPin(a, greenPin, 0);
         writeDigitalPin(a, redPin, 0);
-        writeDigitalPin(a, yellowPin, 1);
+        writeDigitalPin(a, yellowPin, 1); %The yellow light flashes once for a total of 1 second
         pause(0.5);
         writeDigitalPin(a, yellowPin, 0);
         pause(0.5);
@@ -69,7 +69,7 @@ while true
         % Too hot - red blink 0.25s
         writeDigitalPin(a, greenPin, 0);
         writeDigitalPin(a, yellowPin, 0);
-        writeDigitalPin(a, redPin, 1);
+        writeDigitalPin(a, redPin, 1); %The red light flashes twice for a total of 1 second
         pause(0.25);
         writeDigitalPin(a, redPin, 0);
         pause(0.25);
@@ -81,5 +81,3 @@ while true
 end
 
 end
-
-  
