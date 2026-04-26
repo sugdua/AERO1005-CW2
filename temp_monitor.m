@@ -1,10 +1,17 @@
-function temp_monitor(a)
+function temp_monitor(a, monitor_duration)
 % TEMP_MONITOR Real-time temperature monitoring with LED indicators
 %   Reads MCP 9700A sensor on A0, displays live plot, controls LEDs:
 %   Green (D10): constant ON when 18-24 °C (comfort range)
 %   Yellow (D7): blinks 0.5s when below 18 °C
 %   Red (D4): blinks 0.25s when above 24 °C
-%   Stop with Ctrl+C
+%   Stop automatically after motor_duration seconds (default 600 s)
+%   Usage: temp_monitor(a)        -> runs for 600 s
+%          temp_monitor(a, 300)   -> runs for 300 s
+
+% Set default duration
+    if nargin < 2
+        monitor_duration = 30;   %Can change the duration here
+    end
 
 V0 = 0.5;
 TC = 0.01;
@@ -32,7 +39,7 @@ grid on; %Display grid lines
 
 tic
 
-while true
+while toc<= monitor_duration
     % Read temperature
     voltage = readVoltage(a, 'A0');
     current_temp = (voltage - V0) / TC; %Transfer voltage to temperature
@@ -79,5 +86,9 @@ while true
         pause(0.25);
     end
 end
-
+% Turn off all the LED lights to facilitate the start of task 3.
+    writeDigitalPin(a, greenPin, 0);
+    writeDigitalPin(a, yellowPin, 0);
+    writeDigitalPin(a, redPin, 0);
+    disp('Task 2 monitoring finished.');
 end
