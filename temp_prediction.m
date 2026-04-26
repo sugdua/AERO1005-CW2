@@ -1,3 +1,5 @@
+
+  
 function temp_prediction(a, pred_duration)
 % TEMP_PREDICTION Temperature rate monitoring and 5-minute prediction
 %   Reads MCP 9700A sensor on A0, calculates rate of change using
@@ -11,7 +13,7 @@ function temp_prediction(a, pred_duration)
 
 % Set default duration
     if nargin < 2
-        pred_duration = 300;   %Can change the duration here
+        pred_duration = 30;   %Can change the duration here
     end
 V0 = 0.5;
 TC = 0.01;
@@ -31,7 +33,7 @@ temp_data = [];   %Array for storage of temperature data
 
 tic;
 
-while true <= pred_duration  %The while cycle of time limits
+while toc <= pred_duration  %The while cycle of time limits
     % Read temperature
     voltage = readVoltage(a, 'A0');
     current_temp = (voltage - V0) / TC;
