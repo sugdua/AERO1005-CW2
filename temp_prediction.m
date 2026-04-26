@@ -64,9 +64,9 @@ while true <= pred_duration  %The while cycle of time limits
     rate_per_min = rate_per_sec * 60; %Convert to min
     predicted_temp = current_temp + rate_per_sec * 300;  % 5 min ahead
     
-    fprintf('Time: %.0fs | Temp: %.2f C | Rate: %.3f C/min | Predicted: %.2f C\n', ...
-        elapsed, current_temp, rate_per_min, predicted_temp); %Display the table
-    
+    fprintf('Time: %5.0f s | Temp: %7.2f C | Rate: %8.3f C/min | Predicted: %7.2f C\n', ...
+    elapsed, current_temp, rate_per_min, predicted_temp);
+   
     % LED control based on rate
     if rate_per_min > 4
         writeDigitalPin(a, greenPin, 0);
