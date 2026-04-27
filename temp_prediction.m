@@ -1,5 +1,3 @@
-
-  
 function temp_prediction(a, pred_duration)
 % TEMP_PREDICTION Temperature rate monitoring and 5-minute prediction
 %   Reads MCP 9700A sensor on A0, calculates rate of change using
