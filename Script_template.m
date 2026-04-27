@@ -140,4 +140,28 @@ temp_monitor(a);
 temp_prediction(a);
 
 %% TASK 4 - REFLECTIVE STATEMENT [5 MARKS]
-% See submission document
+% One of the challenges faced in this coursework was understanding its main purpose and integrating the learned content into programming and practical operations.
+% Another challenge was ensuring that the main program would automatically progress when tasks 2 and 3 were running normally. 
+% This issue arose because both tasks 2 and 3 initially used an infinite while true loop,
+% which meant that once task 2 started, task 3 could not be initiated without manual intervention.
+% This problem was resolved in subsequent modifications by setting a running time with while toc <= duration. 
+% Finally, great attention to detail was required in the code writing to complete this coursework.
+
+% The strength of my coursework lies in the clear separation of the code modular design,
+% data recording, real-time monitoring, and temperature prediction functions. 
+% A 30-point sliding window combined with linear regression is used to calculate the rate of temperature change,
+% effectively smoothing out noise and enabling a reasonable prediction of the temperature five minutes later. 
+% The LED indication logic is intuitive.
+
+% The deficiency lies in that the key parameters such as the comfort temperature threshold (18 °C, 24 °C), 
+% rate limit (±4 °C/min), and window size are all hard-coded, resulting in poor flexibility. 
+% The prediction model is merely a simple linear extrapolation and does not consider possible nonlinear trends. 
+% Therefore, the program cannot reflect the rapid changes in environmental temperature in real time and has certain delays and errors.
+
+% Future improvements can be made in the following aspects: Currently, 
+% if the temperature threshold needs to be adjusted, 
+% it can only be done by modifying the code, which is rather troublesome. 
+% These numbers can be changed into input parameters of the function to facilitate modification.
+% The LED remains on when the program is forcibly exited. 
+% An automatic light-off function can be added when exiting. 
+% In the future, the code can be adjusted to accurately provide feedback to the user even when the environment changes rapidly and the temperature changes unevenly.
